@@ -11,6 +11,7 @@ public class PostPetRequest extends RequestRestBase {
     public PostPetRequest(){
         requestService = "/pet";
         method = Method.POST;
+
     }
 
     public void setJsonBodyUsingJsonFile(int id,

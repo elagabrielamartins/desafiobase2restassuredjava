@@ -31,7 +31,7 @@ public abstract class RequestRestBase {
         config = RestAssuredConfig.newConfig().jsonConfig(jsonConfig().numberReturnType(BIG_DECIMAL));
         enableLoggingOfRequestAndResponseIfValidationFails();
         headers.put("content-type", "application/json");
-        //headers.put("Authorization", "Bearer "+GlobalParameters.TOKEN); //<== EXEMPLO DE COMO ADICIONAR TOKEN DEFAULT CASO NECESSÁRIO
+        headers.put("Authorization", GlobalParameters.TOKEN); //<== EXEMPLO DE COMO ADICIONAR TOKEN DEFAULT CASO NECESSÁRIO
     }
 
     public ValidatableResponse executeRequest() {
@@ -39,6 +39,12 @@ public abstract class RequestRestBase {
         ExtentReportsUtils.addRestTestInfo(url, requestService, method.toString(), headers, cookies, queryParameters, jsonBody, authenticationType, authenticatorUser, authenticatorPassword, response);
 
         return response.then();
+    }
+    public Response executeRequest2() {
+        Response response = RestAssuredUtils.executeRestRequest(url, requestService, method, headers, cookies, queryParameters, jsonBody, authenticatorUser, authenticatorPassword, authenticationType);
+        ExtentReportsUtils.addRestTestInfo(url, requestService, method.toString(), headers, cookies, queryParameters, jsonBody, authenticationType, authenticatorUser, authenticatorPassword, response);
+
+        return response;
     }
 
     public Response executeRequestNoLog() {
