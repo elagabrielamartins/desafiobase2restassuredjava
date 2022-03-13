@@ -13,9 +13,6 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.Iterator;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.matchesRegex;
-
 public class PostUserTests extends TestBase {
     PostUserRequest postUserRequest;
     SoftAssert softAssert;
