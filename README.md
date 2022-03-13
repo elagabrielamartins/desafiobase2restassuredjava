@@ -1,3 +1,2 @@
-# JavaRestAssuredTemplate
+# JavaRestAssured
 
-#descubra
