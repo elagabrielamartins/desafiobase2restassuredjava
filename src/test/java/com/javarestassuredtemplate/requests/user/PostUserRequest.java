@@ -30,5 +30,12 @@ public class PostUserRequest extends RequestRestBase {
                 replace("$isProtected", isProtected);
     }
 
+    public void setJsonBodyCadastroUsuarioMinimal(
+            String userName
+           ){
+        jsonBody = GeneralUtils.readFileToAString("src/test/java/com/javarestassuredtemplate/jsons/user/postCadastroUsuarioMinimal.json").
+                replace("$userName", userName);
+    }
+
 }
 

@@ -294,7 +294,7 @@ public class PostUserTests extends TestBase {
         softAssert.assertEquals(response.body().jsonPath().get("message").toString(), mensagem, "Validação menssagem email vazio");
         softAssert.assertEquals(response.body().jsonPath().get("code").toString(), codigo, "Validação codigo da menssagem emai vazio");
         softAssert.assertEquals(response.body().jsonPath().get("localized").toString(), localized, "Validação detalhes da menssagem email vazio");
-//      softAssert.assertAll();
+        softAssert.assertAll();
 
     }
 

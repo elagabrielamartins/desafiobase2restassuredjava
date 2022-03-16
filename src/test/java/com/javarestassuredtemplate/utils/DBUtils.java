@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class DBUtils {
     private static String getStringConnection(){
         return "jdbc:mysql://"+
-                GlobalParameters.DB_URL +"\\"+GlobalParameters.DB_NAME;//exemplo MySQL
+                GlobalParameters.DB_URL +"/"+GlobalParameters.DB_NAME;//exemplo MySQL
     }
 
     public static ArrayList<String> getQueryResult(String query){
@@ -16,9 +16,9 @@ public class DBUtils {
         Connection connection = null;
 
         try {
-            Class.forName("com.mysql.jdbc.Driver"); //exemplo para MySQL
+            Class.forName("com.mysql.cj.jdbc.Driver"); //exemplo para MySQL
             Statement stmt = null;
-            connection = DriverManager.getConnection(getStringConnection(), GlobalParameters.DB_USER, GlobalParameters.AUTHENTICATOR_PASSWORD);
+            connection = DriverManager.getConnection(getStringConnection(), GlobalParameters.DB_USER, GlobalParameters.DB_PASSWORD);
 
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
