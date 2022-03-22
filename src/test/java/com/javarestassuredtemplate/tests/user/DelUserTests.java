@@ -3,12 +3,10 @@ package com.javarestassuredtemplate.tests.user;
 import com.javarestassuredtemplate.bases.TestBase;
 import com.javarestassuredtemplate.requests.user.DelUserRequest;
 import com.javarestassuredtemplate.steps.IncluirUserSteps;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 
 public class  DelUserTests  extends TestBase {

@@ -1,0 +1,8 @@
+{
+  "priority": {
+  "name": "$priority"
+},
+  "status": {
+    "name": "$status_name"
+  }
+}

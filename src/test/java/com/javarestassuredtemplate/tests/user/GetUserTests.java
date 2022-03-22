@@ -2,19 +2,15 @@ package com.javarestassuredtemplate.tests.user;
 
 import com.javarestassuredtemplate.bases.TestBase;
 //import com.javarestassuredtemplate.dbsteps.UserDBSteps;
-import com.javarestassuredtemplate.dbsteps.user.ConsultaUserDBSteps;
+import com.javarestassuredtemplate.dbsteps.ConsultaUserDBSteps;
 import com.javarestassuredtemplate.requests.user.GetUserRequest;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.ParseException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
-
-import static org.hamcrest.Matchers.equalTo;
 
 public class GetUserTests extends TestBase {
     GetUserRequest getUserRequest;

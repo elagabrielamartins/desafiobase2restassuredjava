@@ -1,4 +1,4 @@
-package com.javarestassuredtemplate.dbsteps.user;
+package com.javarestassuredtemplate.dbsteps;
 
 import com.javarestassuredtemplate.utils.DBUtils;
 import com.javarestassuredtemplate.utils.GeneralUtils;

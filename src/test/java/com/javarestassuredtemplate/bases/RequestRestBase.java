@@ -11,9 +11,9 @@ import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.*;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+import org.apache.groovy.json.internal.CharBuf;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public abstract class RequestRestBase {
     protected String url = GlobalParameters.URL_DEFAULT;
@@ -22,10 +22,11 @@ public abstract class RequestRestBase {
     protected Object jsonBody = null;
     protected Map<String, String> headers = new HashMap<String, String>();
     protected Map<String, String> cookies = new HashMap<String, String>();
-    protected Map<String, String> queryParameters = new HashMap<String, String>();
+    protected Map<String, String> queryParameters = new LinkedHashMap<String, String>();
     protected AuthenticationType authenticationType = AuthenticationType.NONE;
     protected String authenticatorUser = GlobalParameters.AUTHENTICATOR_USER;
     protected String authenticatorPassword = GlobalParameters.AUTHENTICATOR_PASSWORD;
+    private List<String> pathVariables = new LinkedList<String>();
 
     public RequestRestBase(){
         config = RestAssuredConfig.newConfig().jsonConfig(jsonConfig().numberReturnType(BIG_DECIMAL));
@@ -41,6 +42,7 @@ public abstract class RequestRestBase {
         return response.then();
     }
     public Response executeRequest2() {
+        resolvePathVariables();
         Response response = RestAssuredUtils.executeRestRequest(url, requestService, method, headers, cookies, queryParameters, jsonBody, authenticatorUser, authenticatorPassword, authenticationType);
         ExtentReportsUtils.addRestTestInfo(url, requestService, method.toString(), headers, cookies, queryParameters, jsonBody, authenticationType, authenticatorUser, authenticatorPassword, response);
 
@@ -68,5 +70,19 @@ public abstract class RequestRestBase {
 
     public void setMehtod(Method method){
         this.method = method;
+    }
+
+    public RequestRestBase addQueryParameters(String key,String value){
+        queryParameters.put(key, value);
+        return this;
+    }
+    public void addPathVariable(String path) {
+        pathVariables.add(path);
+    }
+    private void resolvePathVariables(){
+        for(String path : pathVariables) {
+            requestService = requestService + "/" + path;
+        }
+
     }
 }
