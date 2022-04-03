@@ -11,9 +11,9 @@ import org.testng.annotations.Test;
 
 public class  DelUserTests  extends TestBase {
     DelUserRequest delUserRequest;
-
+// region Fluxo de Sucesso
     @Test
-    public void deletaUsuariocomSucesso() {
+    public void excluirUsuariocomSucesso() {
         //Incluir Usuario
         Response responseIncluiUsuario = IncluirUserSteps.cadastrarUsuarioComSucessoMinimal();
         int id = responseIncluiUsuario.body().jsonPath().get("user.id");
@@ -29,6 +29,9 @@ public class  DelUserTests  extends TestBase {
         //Asserções
         Assert.assertEquals(response.statusCode(), statusCodeEsperado, "Validacao do Campo: status_code");
     }
+// endregion
+
+// region Fluxo de exceção
     @Test
     public void apagarUsuarioInexistente(){
         //Parâmetros
@@ -42,7 +45,7 @@ public class  DelUserTests  extends TestBase {
         //Asserções
         Assert.assertEquals(response.statusCode(), statusCodeEsperado,"Validacao do Campo: status_code");
     }
-    //Fluxo de exceção
+
     @Test
     public void naoPermitirExcluirUsuarioProtegido() {
 
@@ -63,9 +66,10 @@ public class  DelUserTests  extends TestBase {
         //Asserções
         Assert.assertEquals(response.statusCode(), statusCodeEsperado, "Validacao do Campo: status_code");
         Assert.assertEquals(response.body().jsonPath().get("message").toString(), mensagem, "Validação tentativa deleçao usuario protegido");
-        Assert.assertEquals(response.body().jsonPath().get("code"), codigo, "Validação codigo da menssagem tentativa deleçao usuario protegido");
+        Assert.assertEquals(response.body().jsonPath().get("code").toString(), String.valueOf(codigo), "Validação codigo da menssagem tentativa deleçao usuario protegido");
         Assert.assertEquals(response.body().jsonPath().get("localized").toString(), localized, "Validação detalhes da menssagem tentativa deleçao usuario protegido");
 
     }
+// endregion
 
  }

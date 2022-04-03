@@ -1,22 +1,18 @@
 package com.javarestassuredtemplate.requests.projects;
 
-import com.javarestassuredtemplate.bases.RequestRestBase;
 import com.javarestassuredtemplate.utils.GeneralUtils;
-import io.restassured.http.Method;
 
-public class PostSubProjectsRequest extends RequestRestBase {
-    public PostSubProjectsRequest(int ID){
-        requestService = "api/rest/projects/" + ID + "/subprojects";
-        method = Method.POST;
+public class PostSubProjectsRequest extends PostProjectsRequest {
+    public PostSubProjectsRequest(int ID) {
+        super();
+        requestService = requestService + ID + "/subprojects";
     }
 
     public void setJsonBodyUsingJsonFile(
             String subProjectName,
-            String inherit){
+            String inherit) {
         jsonBody = GeneralUtils.readFileToAString("src/test/java/com/javarestassuredtemplate/jsons/projects/PostSubProjects.json").
                 replace("$subProjectName", subProjectName).
-                replace("$inherit", inherit );
+                replace("$inherit", inherit);
     }
-
-
 }

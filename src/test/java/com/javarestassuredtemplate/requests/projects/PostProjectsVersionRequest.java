@@ -1,13 +1,11 @@
 package com.javarestassuredtemplate.requests.projects;
 
-import com.javarestassuredtemplate.bases.RequestRestBase;
 import com.javarestassuredtemplate.utils.GeneralUtils;
-import io.restassured.http.Method;
 
-public class PostProjectsVersionRequest extends RequestRestBase {
-    public PostProjectsVersionRequest(int ID) {
-        requestService = "api/rest/projects/" + ID + "/versions/";
-        method = Method.POST;
+public class PostProjectsVersionRequest extends PostProjectsRequest {
+    public PostProjectsVersionRequest(int id) {
+        super();
+        requestService = requestService + id + "/versions/";
     }
 
     public void setJsonBodyUsingJsonFile(
@@ -15,14 +13,12 @@ public class PostProjectsVersionRequest extends RequestRestBase {
             String projectDescription,
             String projectRelease,
             String projectObsolete,
-            String projectDate){
+            String projectDate) {
         jsonBody = GeneralUtils.readFileToAString("src/test/java/com/javarestassuredtemplate/jsons/projects/PostProjectsVersion.json").
                 replace("$projectVersion", projectVersion).
-                replace("$projectDescription",(projectDescription)).
-                replace("$projectRelease", projectRelease ).
-                replace("$projectObsolete", projectObsolete ).
+                replace("$projectDescription", (projectDescription)).
+                replace("$projectRelease", projectRelease).
+                replace("$projectObsolete", projectObsolete).
                 replace("$projectDate", String.valueOf(projectDate));
     }
-
-
 }

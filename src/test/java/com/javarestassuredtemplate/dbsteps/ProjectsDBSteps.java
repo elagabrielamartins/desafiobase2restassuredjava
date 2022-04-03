@@ -9,8 +9,8 @@ public class ProjectsDBSteps {
     private static String queriesPath = System.getProperty("user.dir") + "/src/test/java/com/javarestassuredtemplate/queries/";
 
     public static void apagarProjetos() {
-        String query = GeneralUtils.readFileToAString(queriesPath + "deleteProjetosQuery.sql");
-        DBUtils.executeQuery(query);
+        String query = GeneralUtils.readFileToAString(queriesPath + "apagarProjetos.sql");
+        DBUtils.delete(query);
     }
 
     public static void cadastrarProjeto() {
@@ -40,7 +40,7 @@ public class ProjectsDBSteps {
 
     public static ArrayList<String> ConsultaProjetoID() {
         ArrayList<String> dados;
-        String query = GeneralUtils.readFileToAString(queriesPath + "ConsultaProjeto.sql");
+        String query = GeneralUtils.readFileToAString(queriesPath + "consultaProjeto.sql");
         dados = DBUtils.getQueryResult(query);
         return dados;
     }

@@ -24,7 +24,7 @@ public class GetIssuesTests extends TestBase {
 
 
     @Test
-    public void ConsultaBugComSucesso()  {
+    public void ConsultaBugComSucesso() {
         //Chamadas
         softAssert = new SoftAssert();
         postIssuesSteps = new PostIssuesSteps();
@@ -49,8 +49,9 @@ public class GetIssuesTests extends TestBase {
         softAssert.assertEquals(JsonPathList.getString(response, "issues.project.name"), issues_project_name, "Validação campo: issues.project.name");
         softAssert.assertAll();
     }
+
     @Test
-    public void ConsultaBugListaComSucesso()  {
+    public void ConsultaBugListaComSucesso() {
         //Chamadas
         softAssert = new SoftAssert();
         postIssuesSteps = new PostIssuesSteps();
@@ -60,36 +61,11 @@ public class GetIssuesTests extends TestBase {
 
         //Fluxo
         getIssuesRequest = new GetIssuesRequest();
-        getIssuesRequest.addQueryParameters("page_size","10").addQueryParameters("page","1");
+        getIssuesRequest.addQueryParameters("page_size", "10").addQueryParameters("page", "1");
         Response response = getIssuesRequest.executeRequest2();
 
         //Asserções
         Assert.assertEquals(response.statusCode(), statusCodeEsperado);
         softAssert.assertAll();
     }
-//
-//    @Test
-//    public void ConsultaBugIdInexistente()  {
-//        //Chamadas
-//        softAssert = new SoftAssert();
-//        postIssuesSteps = new PostIssuesSteps();
-//
-//        //Parâmetros
-//        int idProjectOld = postIssuesSteps.cadastrarBugIssues();
-//        int idProject = idProjectOld + 100;
-//        String issues_id = Integer.toString(idProject);
-//        String message = "Issue #" +issues_id+ " not found";
-//        int statusCodeEsperado = HttpStatus.SC_NOT_FOUND;
-//
-//        //Fluxo
-//        getIssuesRequest = new GetIssuesRequest(idProject);
-//        Response response = getIssuesRequest.executeRequest2();
-//
-//        //Asserções
-//        Assert.assertEquals(response.statusCode(), statusCodeEsperado);
-//        softAssert.assertEquals(response.body().jsonPath().get("message").toString(), message, "Validação campo: message");
-//        softAssert.assertAll();
-//    }
-
-
 }

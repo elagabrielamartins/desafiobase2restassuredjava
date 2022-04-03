@@ -16,7 +16,7 @@ public class PostIssuesSteps {
         String summary = "Teste Cadastro de Issues";
         String description = "Utilizado para Issues e Complementos";
         String category_name = "General";
-        String project_name = PostProjectsSteps.cadastrarProjetoNovocomSucessoStep().body().jsonPath().get("project.name");
+        String project_name = PostProjectsSteps.cadastrarProjetoNovoStep( "Projeto 007").body().jsonPath().get("project.name");
         int statusCodeEsperado = HttpStatus.SC_CREATED;
 
         //Fluxo
@@ -28,7 +28,7 @@ public class PostIssuesSteps {
         Assert.assertEquals(response.statusCode(), statusCodeEsperado);
 
         //Retornos
-        return response.body().jsonPath();
+         return response.body().jsonPath();
 
     }
 

@@ -5,7 +5,7 @@ import com.javarestassuredtemplate.utils.GeneralUtils;
 
 import java.util.ArrayList;
 
-public class ConsultaUserDBSteps  {
+public class UserDBSteps {
     private static String queriesPath = System.getProperty("user.dir")+"/src/test/java/com/javarestassuredtemplate/queries/";
 
     public static ArrayList<String> consultaUsuarioADM(){
@@ -13,6 +13,10 @@ public class ConsultaUserDBSteps  {
         String query = GeneralUtils.readFileToAString(queriesPath + "consultaUsuarioAdm.sql");
         dados = DBUtils.getQueryResult(query);
         return dados;
+    }
+    public static void deleteUser() {
+        String query = GeneralUtils.readFileToAString(queriesPath + "deleteUser.sql");
+        DBUtils.executeUpdate(query);
     }
 
 }

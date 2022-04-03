@@ -59,13 +59,12 @@ public class DBUtils {
         Connection connection = null;
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Statement stmt = null;
-            connection = DriverManager.getConnection(getStringConnection(), GlobalParameters.DB_USER, GlobalParameters.AUTHENTICATOR_PASSWORD);
+            connection = DriverManager.getConnection(getStringConnection(), GlobalParameters.DB_USER, GlobalParameters.DB_PASSWORD);
 
             stmt = connection.createStatement();
             stmt.executeQuery(query);
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally{
@@ -75,5 +74,31 @@ public class DBUtils {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void executeUpdate(String query){
+        Connection connection = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Statement stmt = null;
+            connection = DriverManager.getConnection(getStringConnection(), GlobalParameters.DB_USER, GlobalParameters.DB_PASSWORD);
+
+            stmt = connection.createStatement();
+            connection.setAutoCommit(true);
+            stmt.executeUpdate(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally{
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void delete(String query) {
+        executeUpdate(query);
     }
 }
