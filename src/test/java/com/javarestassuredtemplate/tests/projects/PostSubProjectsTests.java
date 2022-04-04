@@ -32,11 +32,11 @@ public class PostSubProjectsTests extends TestBase {
         softAssert = new SoftAssert();
 
         //Parâmetros
-        String projectName = "Projeto 007";
+        String projectName = "Cadastrar Sub Projeto Com Sucesso";
         JsonPath jsonPath = PostProjectsSteps.cadastrarProjetoNovoStep(projectName).body().jsonPath();
         id = jsonPath.get("project.id");
 
-        String projectNameSub = "Projeto 008";
+        String projectNameSub = "Cadastrar Sub Projeto Com Sucesso 1";
         PostProjectsSteps.cadastrarProjetoNovoStep(projectNameSub);
 
         String inherit = "true";
@@ -57,7 +57,7 @@ public class PostSubProjectsTests extends TestBase {
         softAssert = new SoftAssert();
 
         //Parâmetros
-        String projectName = "Projeto 008";
+        String projectName = "Cadastrar Sub Projeto Com Sucesso 1";
         String inherit = "1";
 
         int statusCodeEsperado = HttpStatus.SC_BAD_REQUEST;

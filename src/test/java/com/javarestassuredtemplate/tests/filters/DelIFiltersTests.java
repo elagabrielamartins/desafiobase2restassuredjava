@@ -1,6 +1,7 @@
 package com.javarestassuredtemplate.tests.filters;
 
 import com.javarestassuredtemplate.bases.TestBase;
+import com.javarestassuredtemplate.dbsteps.FilterDBSteps;
 import com.javarestassuredtemplate.requests.filters.DelIFiltersRequest;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -19,10 +20,12 @@ public class DelIFiltersTests extends TestBase {
 
         //Parâmetros
         int statusCodeEsperado01 = HttpStatus.SC_NO_CONTENT;
-        String id = "4";
+        int idFilter = 4;
+        String nameFilter = "Filtro 4";
+        FilterDBSteps.insertFilter(idFilter, nameFilter, 0);
 
         //Fluxo
-        delIFiltersRequest = new DelIFiltersRequest(id);
+        delIFiltersRequest = new DelIFiltersRequest(String.valueOf(idFilter));
         Response response = delIFiltersRequest.executeRequest2();
 
         //Asserções
@@ -36,10 +39,10 @@ public class DelIFiltersTests extends TestBase {
 
         //Parâmetros
         int statusCodeEsperado01 = HttpStatus.SC_NOT_FOUND;
-        String id = "14";
+        Integer idFilter = 14;
 
         //Fluxo
-        delIFiltersRequest = new DelIFiltersRequest(id);
+        delIFiltersRequest = new DelIFiltersRequest(String.valueOf(idFilter));
         Response response = delIFiltersRequest.executeRequest2();
 
         //Asserções
@@ -53,10 +56,10 @@ public class DelIFiltersTests extends TestBase {
 
         //Parâmetros
         int statusCodeEsperado01 = HttpStatus.SC_METHOD_NOT_ALLOWED;
-        String id = "";
+        String idFilter = "";
 
         //Fluxo
-        delIFiltersRequest = new DelIFiltersRequest(id);
+        delIFiltersRequest = new DelIFiltersRequest(String.valueOf(idFilter));
         Response response = delIFiltersRequest.executeRequest2();
 
         //Asserções

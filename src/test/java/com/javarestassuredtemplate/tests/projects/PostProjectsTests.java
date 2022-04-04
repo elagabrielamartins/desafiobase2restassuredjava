@@ -30,10 +30,10 @@ public class PostProjectsTests extends TestBase {
         softAssert = new SoftAssert();
 
         //Parâmetros
-        String projectName = "Projeto 007";
+        String projectName = "Cadastrar Projeot Novo Com Sucesso";
         int statusID = 50;
         String statusName = "stable";
-        String descriptionText = "Projeto 007 Criado para os testes Automação";
+        String descriptionText = "Projeto Cadastrar Projeot Novo Com Sucesso Criado para os testes Automação";
         int enableID = 0;
         int viewID = 10;
         String viewName = "public";

@@ -38,9 +38,26 @@ public class ProjectsDBSteps {
         DBUtils.executeQuery(query);
     }
 
-    public static ArrayList<String> ConsultaProjetoID() {
+//    public static ArrayList<String> ConsultaProjetoID() {
+//        ArrayList<String> dados;
+//        String query = GeneralUtils.readFileToAString(queriesPath + "consultaProjeto.sql");
+//        dados = DBUtils.getQueryResult(query);
+//        return dados;
+//    }
+
+    public static ArrayList<String> ConsultaProjetoID(Integer id, Integer limit) {
         ArrayList<String> dados;
-        String query = GeneralUtils.readFileToAString(queriesPath + "consultaProjeto.sql");
+        String query = (GeneralUtils.readFileToAString(queriesPath + "consultaProjeto.sql"));
+        if (id != null) {
+            query = query + " WHERE ID" + id;
+        }
+
+        if (limit != null) {
+            query = query + " LIMIT " + limit;
+        } else {
+            query = query + " LIMIT 1 ";
+        }
+
         dados = DBUtils.getQueryResult(query);
         return dados;
     }

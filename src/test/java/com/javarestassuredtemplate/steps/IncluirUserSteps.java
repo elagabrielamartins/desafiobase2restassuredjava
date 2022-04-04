@@ -48,8 +48,8 @@ public class IncluirUserSteps {
 
     public static Response cadastrarEmailRepetido(int nroUser) {
         //Parâmetros
-        String userName = "Usuario Cadastro repetido " + nroUser;
-        String email = "usuarioautomacao001@testusuario001.com.br";
+        String userName = "Usuario Cadastro repetido 55" + nroUser;
+        String email = "usuarioautomacao551@testusuario551.com.br";
         return cadastrarUsuario(email, userName );
     }
 

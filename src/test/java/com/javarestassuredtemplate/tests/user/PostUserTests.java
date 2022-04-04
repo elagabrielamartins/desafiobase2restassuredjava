@@ -25,7 +25,7 @@ public class PostUserTests extends TestBase {
 //Limpando base
     public void afterTesteDeletaUser() {
         if (GlobalParameters.ENVIROMENT != "dev"){
-            UserDBSteps.deleteUser();
+//            UserDBSteps.deleteUser();
         }
 
     }
@@ -38,10 +38,10 @@ public class PostUserTests extends TestBase {
         softAssert = new SoftAssert();
 
         //Parâmetros
-        String userName = "Teste Usuario 001 Automacao API";
+        String userName = "Teste Usuario 111 Automacao API";
         String password = "123456";
-        String nameReal = "Teste Usuario 001";
-        String email = "usuarioautomacao001@testusuario001.com.br";
+        String nameReal = "Teste Usuario 111";
+        String email = "usuarioautomacao111@testusuario001.com.br";
         String accessLevelName = "updater";
         String enabled = "true";
         String isProtected = "false";
@@ -196,7 +196,7 @@ public class PostUserTests extends TestBase {
         IncluirUserSteps.cadastrarEmailRepetido(1);
 
         //Parâmetros
-        String email = "usuarioautomacao001@testusuario001.com.br";
+        String email = "usuarioautomacao551@testusuario551.com.br";
         int statusCodeEsperado = HttpStatus.SC_BAD_REQUEST;
         String mensagem = "Email '" + email + "' already used.";
         int codigo = 813;

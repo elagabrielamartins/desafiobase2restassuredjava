@@ -1,11 +1,16 @@
 package com.javarestassuredtemplate.tests.filters;
 
 import com.javarestassuredtemplate.bases.TestBase;
+import com.javarestassuredtemplate.dbsteps.FilterDBSteps;
+import com.javarestassuredtemplate.dbsteps.ProjectsDBSteps;
 import com.javarestassuredtemplate.requests.filters.GetFiltersIDRequest;
 import com.javarestassuredtemplate.requests.filters.GetFiltersRequest;
+import com.javarestassuredtemplate.steps.PostProjectsSteps;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -19,9 +24,13 @@ public class GetFiltersTests  extends TestBase {
     public void ConsultarFiltrosCadastrado(){
         softAssert = new SoftAssert();
 
+        int idFilter1 = 1;
+        String nameFilter1 = "Filtro 1";
+        FilterDBSteps.insertFilter(idFilter1, nameFilter1, 0);
+        int idFilter2 = 2;
+        String nameFilter2 = "Filtro 2";
+        FilterDBSteps.insertFilter(idFilter2, nameFilter2, 0);
         //Parâmetros
-        String id = "2";
-        String name = "TesteFiltro002";
         int statusCodeEsperado = HttpStatus.SC_OK;
 
         //Fluxo
@@ -30,8 +39,7 @@ public class GetFiltersTests  extends TestBase {
 
         //Asserções
         Assert.assertEquals(response.statusCode(), statusCodeEsperado);
-        softAssert.assertEquals(response.body().jsonPath().get("filters[0].id").toString(), id, "Validação campo: filters[0].id");
-        softAssert.assertEquals(response.body().jsonPath().get("filters[0].name").toString(), name, "Validação campo: filters[0].name");
+        softAssert.assertTrue(response.body().jsonPath().get("filters[0].id").toString() != null);
         softAssert.assertAll();
     }
 
@@ -39,21 +47,23 @@ public class GetFiltersTests  extends TestBase {
     public void ConsultarFiltroIDCadsatrado(){
         softAssert = new SoftAssert();
 
+        int idFilter = 3;
+        String nameFilter = "Filtro 3";
+        FilterDBSteps.insertFilter(idFilter, nameFilter, 0);
+
         //Parâmetros
-        String filter_id = "3";
-        String id = "3";
-        String name = "TesteFiltro007";
         int statusCodeEsperado = HttpStatus.SC_OK;
 
         //Fluxo
-        getFiltersIDRequest = new GetFiltersIDRequest(filter_id);
+        getFiltersIDRequest = new GetFiltersIDRequest(idFilter);
         Response response = getFiltersIDRequest.executeRequest2();
 
         //Asserções
         Assert.assertEquals(response.statusCode(), statusCodeEsperado);
-        softAssert.assertEquals(response.body().jsonPath().get("filters[0].id").toString(), id, "Validação campo: filters[0].id");
-        softAssert.assertEquals(response.body().jsonPath().get("filters[0].name").toString(), name, "Validação campo: filters[0].name");
+        softAssert.assertEquals(response.body().jsonPath().get("filters[0].id").toString(), String.valueOf(idFilter), "Validação campo: filters[0].id");
+        softAssert.assertEquals(response.body().jsonPath().get("filters[0].name").toString(), nameFilter, "Validação campo: filters[0].name");
         softAssert.assertAll();
+
     }
 
     @Test
@@ -61,12 +71,12 @@ public class GetFiltersTests  extends TestBase {
         softAssert = new SoftAssert();
 
         //Parâmetros
-        String filter_id = "10";
+        int filterId = 10;
         String name = "TesteFiltro007";
         int statusCodeEsperado = HttpStatus.SC_OK;
 
         //Fluxo
-        getFiltersIDRequest = new GetFiltersIDRequest(filter_id);
+        getFiltersIDRequest = new GetFiltersIDRequest(filterId);
         Response response = getFiltersIDRequest.executeRequest2();
 
         //Asserções
@@ -79,11 +89,11 @@ public class GetFiltersTests  extends TestBase {
         softAssert = new SoftAssert();
 
         //Parâmetros
-        String filter_id = null;
+        Integer filterId = null;
         int statusCodeEsperado = HttpStatus.SC_OK;
 
         //Fluxo
-        getFiltersIDRequest = new GetFiltersIDRequest(filter_id);
+        getFiltersIDRequest = new GetFiltersIDRequest(filterId);
         Response response = getFiltersIDRequest.executeRequest2();
 
         //Asserções
@@ -96,12 +106,12 @@ public class GetFiltersTests  extends TestBase {
         softAssert = new SoftAssert();
 
         //Parâmetros
-        String filter_id = "0";
+        int filterId = 0;
         String name = "TesteFiltro003";
         int statusCodeEsperado = HttpStatus.SC_OK;
 
         //Fluxo
-        getFiltersIDRequest = new GetFiltersIDRequest(filter_id);
+        getFiltersIDRequest = new GetFiltersIDRequest(filterId);
         Response response = getFiltersIDRequest.executeRequest2();
 
         //Asserções
@@ -109,4 +119,9 @@ public class GetFiltersTests  extends TestBase {
 
     }
 
+    @AfterTest
+    public void afterTest () {
+        ProjectsDBSteps.apagarProjetos();
+        FilterDBSteps.apagarFilters();
+    }
 }

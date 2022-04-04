@@ -2,6 +2,7 @@ package com.javarestassuredtemplate.tests.projects;
 
 import com.javarestassuredtemplate.bases.TestBase;
 import com.javarestassuredtemplate.requests.projects.PatchProjectsRequest;
+import com.javarestassuredtemplate.steps.PostProjectsSteps;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
@@ -13,15 +14,16 @@ public class PatchProjectsTests extends TestBase {
     @Test
     public void atualizarNomeProjetoSucesso(){
         //Parâmetros
-        int ID = 5;
-        String idProjects = "5";
-        String nameProjects = "Projeto Editado para Teste";
+        String projectName = "Atualizar Nome Projeto Com Sucesso";
+        int idProject = PostProjectsSteps.cadastrarProjetoNovoStep(projectName).body().jsonPath().get("project.id");
+
+        String nameProjectUpdate = projectName + " 1";
         String enabled = "0";
         int statusCodeEsperado = HttpStatus.SC_OK;
 
         //Fluxo
-        patchProjectsRequest = new PatchProjectsRequest(ID);
-        patchProjectsRequest.setJsonBodyUsingJsonFile(idProjects, nameProjects, enabled);
+        patchProjectsRequest = new PatchProjectsRequest(idProject);
+        patchProjectsRequest.setJsonBodyUsingJsonFile(String.valueOf(idProject), nameProjectUpdate, enabled);
         Response response = patchProjectsRequest.executeRequest2();
 
         //Asserções

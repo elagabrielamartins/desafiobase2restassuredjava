@@ -3,6 +3,8 @@ package com.javarestassuredtemplate.tests.issues;
 import com.javarestassuredtemplate.bases.TestBase;
 import com.javarestassuredtemplate.requests.Issues.PostIssuesRequest;
 import com.javarestassuredtemplate.steps.PostIssuesSteps;
+import com.javarestassuredtemplate.steps.PostProjectsSteps;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
@@ -12,7 +14,6 @@ import org.testng.asserts.SoftAssert;
 public class PostIssuesTests extends TestBase {
     SoftAssert softAssert;
     PostIssuesRequest postIssuesRequest;
-    PostIssuesSteps postIssuesSteps;
 
     @Test
     public void cadastrarBugcomSucesso()  {
@@ -22,13 +23,16 @@ public class PostIssuesTests extends TestBase {
         //Parâmetros
         String summary = "Teste Cadastro de bug";
         String description = "Utilizado para Automatizar os testes";
-        String category_name = "General";
-        String project_name = "Projeto 007";
+        String categoryName = "General";
+
+        String projectName = "Cadastrar Bug Com Sucesso";
+        PostProjectsSteps.cadastrarProjetoNovoStep(projectName).body().jsonPath();
+
         int statusCodeEsperado = HttpStatus.SC_CREATED;
 
         //Fluxo
         postIssuesRequest = new PostIssuesRequest();
-        postIssuesRequest.setJsonBodyUsingJsonFile(summary, description, category_name, project_name);
+        postIssuesRequest.setJsonBodyUsingJsonFile(summary, description, categoryName, projectName);
         Response response = postIssuesRequest.executeRequest2();
 
         //Asserções

@@ -2,6 +2,7 @@ package com.javarestassuredtemplate.tests.projects;
 
 import com.javarestassuredtemplate.bases.TestBase;
 import com.javarestassuredtemplate.requests.projects.PostProjectsVersionRequest;
+import com.javarestassuredtemplate.steps.PostProjectsSteps;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
@@ -18,7 +19,9 @@ public class PostProjectsVersionTests extends TestBase {
         softAssert = new SoftAssert();
 
         //Parâmetros
-        int ID = 1;
+        String projectName = "Cadastrar Versao No Projeto";
+        int idProject = PostProjectsSteps.cadastrarProjetoNovoStep(projectName).body().jsonPath().get("project.id");
+
         String projectVersion = "V.1.99.77";
         String projectDescription = "Versao Testes API";
         String projectRelease = "true";
@@ -28,7 +31,7 @@ public class PostProjectsVersionTests extends TestBase {
         int statusCodeEsperado = HttpStatus.SC_NO_CONTENT;
 
         //Fluxo
-        postProjectsVersionRequest = new PostProjectsVersionRequest(ID);
+        postProjectsVersionRequest = new PostProjectsVersionRequest(idProject);
         postProjectsVersionRequest.setJsonBodyUsingJsonFile(projectVersion, projectDescription, projectRelease, projectObsolete, projectDate);
         Response response = postProjectsVersionRequest.executeRequest2();
 
@@ -49,7 +52,7 @@ public class PostProjectsVersionTests extends TestBase {
         String projectObsolete = "true";
         String projectDate = "2022-03-18";
         int statusCodeEsperado = HttpStatus.SC_BAD_REQUEST;
-        String menssage = "Version 'V.1.00.00' already exists";
+        String menssage = "Version '"+ projectVersion + "' already exists";
         String code = "1600";
 
         //Fluxo

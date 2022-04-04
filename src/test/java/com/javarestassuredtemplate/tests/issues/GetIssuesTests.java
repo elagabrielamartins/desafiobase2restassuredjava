@@ -45,7 +45,7 @@ public class GetIssuesTests extends TestBase {
         //Asserções
         Assert.assertEquals(response.statusCode(), statusCodeEsperado);
 
-        softAssert.assertEquals(JsonPathList.getInt(response, "issues.id"), issues_id, "Validação campo: issues.id");
+        softAssert.assertEquals(JsonPathList.getInt(response, "issues.id"), Integer.valueOf(issues_id), "Validação campo: issues.id");
         softAssert.assertEquals(JsonPathList.getString(response, "issues.project.name"), issues_project_name, "Validação campo: issues.project.name");
         softAssert.assertAll();
     }

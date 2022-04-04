@@ -2,6 +2,7 @@ package com.javarestassuredtemplate.tests.projects;
 
 import com.javarestassuredtemplate.bases.TestBase;
 import com.javarestassuredtemplate.requests.projects.DelProjectsRequest;
+import com.javarestassuredtemplate.steps.PostProjectsSteps;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
@@ -12,12 +13,14 @@ public class DelProjectsTests extends TestBase {
 
     @Test
     public void deletaProjetocomSucesso(){
+
+        String projectName = "Deleta Projeto Com Sucesso";
+        int id = PostProjectsSteps.cadastrarProjetoNovoStep(projectName).body().jsonPath().get("project.id");
         //Parâmetros
-        int ID = 7;
         int statusCodeEsperado = HttpStatus.SC_OK;
 
         //Fluxo
-        delProjectsRequest = new DelProjectsRequest(ID);
+        delProjectsRequest = new DelProjectsRequest(id);
         Response response = delProjectsRequest.executeRequest2();
 
         //Asserções

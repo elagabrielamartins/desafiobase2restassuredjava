@@ -15,13 +15,14 @@ public class PostIssuesSteps {
         //Parâmetros
         String summary = "Teste Cadastro de Issues";
         String description = "Utilizado para Issues e Complementos";
-        String category_name = "General";
-        String project_name = PostProjectsSteps.cadastrarProjetoNovoStep( "Projeto 007").body().jsonPath().get("project.name");
+        String categoryName = "General";
+        String projectName = "Cadastrar Bug Issues Steps";
+        PostProjectsSteps.cadastrarProjetoNovoStep( projectName);
         int statusCodeEsperado = HttpStatus.SC_CREATED;
 
         //Fluxo
         postIssuesRequest = new PostIssuesRequest();
-        postIssuesRequest.setJsonBodyUsingJsonFile(summary, description, category_name, project_name);
+        postIssuesRequest.setJsonBodyUsingJsonFile(summary, description, categoryName, projectName);
         Response response = postIssuesRequest.executeRequest2();
 
         //Asserções

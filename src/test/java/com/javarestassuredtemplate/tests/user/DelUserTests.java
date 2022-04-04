@@ -1,11 +1,15 @@
 package com.javarestassuredtemplate.tests.user;
 
 import com.javarestassuredtemplate.bases.TestBase;
+import com.javarestassuredtemplate.dbsteps.UserDBSteps;
 import com.javarestassuredtemplate.requests.user.DelUserRequest;
 import com.javarestassuredtemplate.steps.IncluirUserSteps;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 
@@ -72,4 +76,9 @@ public class  DelUserTests  extends TestBase {
     }
 // endregion
 
- }
+
+    @AfterTest
+    public void afterTest() {
+        UserDBSteps.deleteUser();
+    }
+}

@@ -4,8 +4,8 @@ import com.javarestassuredtemplate.bases.RequestRestBase;
 import io.restassured.http.Method;
 
 public class GetFiltersIDRequest extends RequestRestBase {
-    public GetFiltersIDRequest(String filter_id){
-        requestService = "api/rest/filters/"+ filter_id;
+    public GetFiltersIDRequest(Integer filterId){
+        requestService = "api/rest/filters/"+ filterId;
         method = Method.GET;
     }
 
