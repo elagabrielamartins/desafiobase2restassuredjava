@@ -21,16 +21,6 @@ public class PostUserTests extends TestBase {
     PostUserRequest postUserRequest;
     SoftAssert softAssert;
 
-    @AfterTest
-//Limpando base
-    public void afterTesteDeletaUser() {
-        if (GlobalParameters.ENVIROMENT != "dev"){
-//            UserDBSteps.deleteUser();
-        }
-
-    }
-
-
     //region Fluxos de Sucesso
     @Test
     public void cadastrarUsuariocomSucesso() {
@@ -240,7 +230,7 @@ public class PostUserTests extends TestBase {
         //Asserções
         Assert.assertEquals(response.statusCode(), statusCodeEsperado);
         softAssert.assertEquals(response.body().jsonPath().get("message").toString(), mensagem, "Validação menssagem userName vazio");
-        softAssert.assertEquals(response.body().jsonPath().get("code").toString(), codigo, "Validação codigo da menssagem userName vazio");
+        softAssert.assertEquals(response.body().jsonPath().get("code").toString(), String.valueOf(codigo), "Validação codigo da menssagem userName vazio");
         softAssert.assertEquals(response.body().jsonPath().get("localized").toString(), localized, "Validação detalhes da menssagem userName vazio");
 //      softAssert.assertAll();
 
@@ -279,4 +269,12 @@ public class PostUserTests extends TestBase {
 
     }
 //endregion
+
+    @AfterTest
+    public void afterTesteDeletaUser() {
+        if (GlobalParameters.ENVIROMENT != "dev"){
+            UserDBSteps.deleteUser();
+        }
+
+    }
 }
