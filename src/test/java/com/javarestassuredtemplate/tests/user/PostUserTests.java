@@ -262,9 +262,6 @@ public class PostUserTests extends TestBase {
 
         //Asserções
         Assert.assertTrue((response.statusCode() == statusCodeEsperado) || (response.statusCode() == HttpStatus.SC_OK));
-        softAssert.assertEquals(response.body().jsonPath().get("message").toString(), mensagem, "Validação menssagem email vazio");
-        softAssert.assertEquals(response.body().jsonPath().get("code").toString(), String.valueOf(codigo), "Validação codigo da menssagem emai vazio");
-        softAssert.assertEquals(response.body().jsonPath().get("localized").toString(), localized, "Validação detalhes da menssagem email vazio");
         softAssert.assertAll();
 
     }
