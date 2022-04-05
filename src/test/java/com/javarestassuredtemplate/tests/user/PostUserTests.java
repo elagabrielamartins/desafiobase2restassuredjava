@@ -91,10 +91,10 @@ public class PostUserTests extends TestBase {
         softAssert = new SoftAssert();
 
         //Parâmetros
-        String userName = "Teste Usuario 999 Automacao API";
+        String userName = "Teste Usuario 9999 Automacao API";
         String password = "123456";
-        String nameReal = "Teste Usuario 999";
-        String email = "usuarioautomacao999@testusuario999.com.br";
+        String nameReal = "Teste Usuario 9999";
+        String email = "usuarioautomacao9999@testusuario9999.com.br";
         String accessLevelName = "updater";
         String enabled = "true";
         String isProtected = "false";
