@@ -1,4 +1,4 @@
-# Desafio de Automação API Rest - Base2
+# Desafio de Automação API Rest 
 
 Os testes serão realizados na API Rest do Mantis Bug Tracker.
 
@@ -44,7 +44,7 @@ Testes dos seguintes endpoints:
 <br> DelSubProjectsTests	2
  
  > Dos quais realizo validação de parâmetros obrigatórios, parâmetros de entrada válidos, parâmetros de entrada inválidos, payload da response, HTTP Status Code etc.
-Testes distribuídos em classes localizadas no package tests. Conforme documentação: [Mantis Bug Tracker REST API](https://documenter.getpostman.com/view/29959/mantis-bug-tracker-rest-api/7Lt6zkP#intro). Utilizado a arquitetura padrão disponibilizada pela Base2.
+Testes distribuídos em classes localizadas no package tests. Conforme documentação: [Mantis Bug Tracker REST API](https://documenter.getpostman.com/view/29959/mantis-bug-tracker-rest-api/7Lt6zkP#intro).
 
  - [x] **2)** Alguns scripts devem ler dados de uma planilha Excel para implementar Data-Driven.
  - [x] **3)** Notem que 50 scripts podem cobrir mais de 50 casos de testes se usarmos Data-Driven. Em outras palavras, implementar 50 CTs usando data-driven não é a mesma coisa que implementar 50 scripts.
